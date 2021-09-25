@@ -1,0 +1,119 @@
+package Question2;
+import java.util.Scanner;
+
+import static Question2.Account.deposit;
+import static Question2.Account.withdraw;
+
+public class AccountSystem {
+    public static void main(String[] args) { //The main method is where the program starts running.
+
+        Scanner inputReader = new Scanner(System.in);
+        System.out.print("Please Enter Account Name: ");
+        char accountname = inputReader.next().charAt(0);
+
+        Scanner inputReaderr = new Scanner(System.in);
+        System.out.print("Please Enter Your Account Balance: ");
+        double balance = inputReaderr.nextDouble();
+
+        int Options = 0;
+        Scanner input = new Scanner(System.in);
+        do {
+            showOptions();
+            Options = input.nextInt();
+            switch (Options) {
+                case 1:
+                    System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                    System.out.println("Dear "+ accountname);
+                    System.out.println("Current balance: " + balance);
+                    System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                    break;
+                case 2:
+                    System.out.print("Please enter amount you wish to withdraw: ");
+                    double amount = input.nextDouble();
+                    withdraw(amount);
+                    break;
+                case 3:
+                    System.out.print("Please enter amount you wish to deposit: ");
+                    double amount2 = input.nextDouble();
+                    deposit(amount2);
+                    break;
+                case 99:
+                    System.out.println("Exit");
+                    break;
+                default:
+                    System.out.println("Invalid Above Options! Please try again.");
+                    break;
+            }
+        } while (Options != 99);
+        System.out.println("Thank you for banking with us!");
+    }
+    public static void showOptions() {
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("1. Account Status");
+        System.out.println("2. Withdrawal");
+        System.out.println("3. Deposit");
+        System.out.println("99. Exit");
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.print("Please select above options: ");
+    }
+}
+
+
+
+
+package Question2;
+import java.util.Scanner;
+public class Account {
+    private static double balance; //public so anyone can access
+     // this class is only the one which modifies the balance as a private
+    private char accountname;
+
+
+    public Account(char accountname, double balance) { // the return type, void means no return value
+        this.accountname = accountname;
+        this.balance = balance;
+    }
+
+    public static void deposit(double amount) {
+        if (amount > 0) {   // The amount deposit must be more than 0
+            balance += amount;
+            System.out.println("Amount deposit is: " + amount);
+        } else {
+            System.out.println("Amount cannot be negative. "); // With the negative amount input, the msg will be displayed
+        }
+    }
+    public static void withdraw(double amount) {
+        if (amount > 0 && amount <= balance) { // the withdrawal amounts cannot be greater than than balance
+            balance -= amount;
+            System.out.println("Amount withdraw is: " + amount);
+        } else {
+            System.out.println("Amount cannot be greater than the balance. "); // With the unacceptable amount input, the msg will be displayed
+        }
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+
+    public void setAccountname(char accountname) {
+        this.accountname = accountname;
+    }
+
+    public double getBalance() {
+        return this.balance;
+    }
+
+    public int getAccountName() {
+        return this.accountname;
+    }
+}
+
+
+
+
+
+
+
+
+
+
